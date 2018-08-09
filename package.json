@@ -1,9 +1,25 @@
 {
     "name": "react-rating-tooltip",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "React Star Rating/Review Component with tooltip support",
     "main": "./lib/Rating.js",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vilvaathibanpb/react-rating-tooltip"
+    },
+    "keywords": [
+        "react",
+        "ratings",
+        "rating",
+        "star ratings",
+        "star-ratings",
+        "react-reviews",
+        "react-ratings",
+        "react-rating",
+        "react ratings",
+        "react rating"
+    ],
     "scripts": {
         "build": "webpack"
     },

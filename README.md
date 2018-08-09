@@ -16,7 +16,7 @@ npm i react-rating-tooltip
 
 ### Demo
 
-[Online Demo Link](https://vilvaathibanpb.github.io/react-search-multi-select-demo/)
+[Sandbox link to Play with](https://codesandbox.io/s/31zl6wop91)
 
 ### How to Use
 
