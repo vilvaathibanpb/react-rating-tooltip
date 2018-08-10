@@ -44,7 +44,7 @@ class Rating extends Component {
   }
 
   render() {
-    const { max, counterPosition, textPosition, tooltipContent, ratingValue, styleConfig } = this.props;
+    const { max, counterPosition, textPosition, tooltipContent, ratingValue, styleConfig, disabled} = this.props;
     const { current, hover } = this.state;
     const stars = new Array(max);
     const currentValue = hover >= 0 ? hover : current
@@ -54,10 +54,10 @@ class Rating extends Component {
         tpText={tooltipContent && tooltipContent[i] ? tooltipContent[i] : null}
         selected={i < currentValue ? true : false}
         key={i}
-        onMouseLeave={this.onMouseLeave}
-        onHover={this.onHover}
+        onMouseLeave={disabled ? ()=>{} : this.onMouseLeave}
+        onHover={disabled ? ()=>{} : this.onHover}
         index={i}
-        selectStar={this.setSelected}
+        selectStar={disabled ? ()=>{} : this.setSelected}
         InActiveComponent={this.props.InActiveComponent}
         ActiveComponent={this.props.ActiveComponent}
       />;
@@ -98,6 +98,7 @@ Rating.propTypes = {
   defaultRating: PropTypes.number,
   counterPosition: PropTypes.oneOf(['left', 'right']),
   clearRating: PropTypes.bool,
+  disabled: PropTypes.bool,
   textPosition: PropTypes.oneOf(['left', 'right']),
   tooltipContent: PropTypes.array,
   ratingValue: PropTypes.array,
@@ -120,6 +121,7 @@ Rating.propTypes = {
 
 Rating.defaultProps = {
   clearRating: true,
+  disabled: false,
   defaultRating: 0,
   styleConfig: {
     counterStyle: {

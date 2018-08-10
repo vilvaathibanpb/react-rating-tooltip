@@ -119,6 +119,7 @@ Details of the Props to be passed:
 | counterPosition | String | `Possible Values - ['left', 'right']`. This determines the position of the Rating Count in the Component. If not passed, Count will not be displayed. |
 | textPosition | String | `Possible Values - ['left', 'right']`. This determines the position of the Rating Value (Status) in the Component. If not passed, Select value will not be displayed. |
 | clearRating | Boolean | `Default Value - true`. This determines whether the rating can be cleared/reset. If passed true, clicking again on the same rating count will clear the rating. |
+| disabled | Boolean | `Default Value - false`. This determines whether the rating can be enabled/disabled. If passed true, the rating component will be disabled and act as Read only component |
 | tooltipContent | Array | The Array of values as tooltip. Tooltips Values are matched to Rating count based on index. If not passed, tooltip will not be added |
 | ratingValue | Array | The Array of values for Rating count. Rating Values are matched to Rating count based on index. If not passed, Values will not be set |
 | onChange | Function | `Required`. A callback function which gets two arguements on every change of Rating - `Rating count, Rating Value (if passed)` |
