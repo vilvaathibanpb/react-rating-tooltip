@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Star from "./Star";
+import PropTypes from 'prop-types';
 
 
 class Rating extends Component {
