@@ -7,7 +7,7 @@ class Rating extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 0,
+      current: this.props.defaultRating,
       hover: -1,
     }
   }
@@ -94,6 +94,7 @@ class Rating extends Component {
 
 Rating.propTypes = {
   max: PropTypes.number.isRequired,
+  defaultRating: PropTypes.number,
   counterPosition: PropTypes.oneOf(['left', 'right']),
   clearRating: PropTypes.bool,
   textPosition: PropTypes.oneOf(['left', 'right']),
@@ -118,6 +119,7 @@ Rating.propTypes = {
 
 Rating.defaultProps = {
   clearRating: true,
+  defaultRating: 0,
   styleConfig: {
     counterStyle: {
       height: '28px',

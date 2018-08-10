@@ -33,6 +33,7 @@ class SampleRating extends React.Component{
         super(props);
         this.state = {
           max: 4,
+          defaultRating: 2,
           counterPosition: 'left',
           clearRating: true,
           textPosition: 'right',
@@ -89,6 +90,7 @@ class SampleRating extends React.Component{
         return(
             <Rating 
                 max = {this.state.max}
+                defaultRating = {this.state.defaultRating}
                 counterPosition = {this.state.counterPosition}
                 clearRating = {this.state.clearRating}
                 textPosition = {this.state.textPosition}
@@ -113,6 +115,7 @@ Details of the Props to be passed:
 | Prop-name | Type | Description |
 | ------ | ------ | ------ |
 | max | Number | `Required`. This determines the maximum number of Stars or Rating in the Component. |
+| defaultRating | Number | `Default value - 0`. This determines the current number of selected Stars or Rating in the Component. |
 | counterPosition | String | `Possible Values - ['left', 'right']`. This determines the position of the Rating Count in the Component. If not passed, Count will not be displayed. |
 | textPosition | String | `Possible Values - ['left', 'right']`. This determines the position of the Rating Value (Status) in the Component. If not passed, Select value will not be displayed. |
 | clearRating | Boolean | `Default Value - true`. This determines whether the rating can be cleared/reset. If passed true, clicking again on the same rating count will clear the rating. |
@@ -143,6 +146,7 @@ Details of the styleConfig:
 ```sh
 {
       max: PropTypes.number.isRequired,
+      defaultRating: PropTypes.number,
       counterPosition: PropTypes.oneOf(['left', 'right']),
       clearRating: PropTypes.bool,
       textPosition: PropTypes.oneOf(['left', 'right']),
@@ -171,6 +175,7 @@ Details of the styleConfig:
 ```sh
 {
       clearRating: true,
+      defaultRating: 0,
       styleConfig: {
         counterStyle: {
           height: '28px',
@@ -178,8 +183,7 @@ Details of the styleConfig:
           paddingLeft: '12px',
           paddingRight: '12px',
           color: '#FFF',
-          lineHeight: '28px',
-    
+          lineHeight: '28px',   
         },
         starContainer: {
           fontSize: '24px',
