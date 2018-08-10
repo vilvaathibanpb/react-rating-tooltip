@@ -1,6 +1,6 @@
 {
     "name": "react-rating-tooltip",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "React Star Rating/Review Component with tooltip support",
     "main": "./lib/Rating.js",
     "license": "MIT",
