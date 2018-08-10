@@ -150,6 +150,7 @@ Details of the styleConfig:
       defaultRating: PropTypes.number,
       counterPosition: PropTypes.oneOf(['left', 'right']),
       clearRating: PropTypes.bool,
+      disabled: PropTypes.bool,
       textPosition: PropTypes.oneOf(['left', 'right']),
       tooltipContent: PropTypes.array,
       ratingValue: PropTypes.array,
@@ -176,6 +177,7 @@ Details of the styleConfig:
 ```sh
 {
       clearRating: true,
+      disabled: false,
       defaultRating: 0,
       styleConfig: {
         counterStyle: {
