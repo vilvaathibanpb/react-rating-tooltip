@@ -214,4 +214,4 @@ Details of the styleConfig:
 
 ## Contribution
 
-You are welcome to raise issues and PRs in the [repository](https://github.com/vilvaathibanpb/react-rating-tooltip)
+You are welcome to raise issues and PRs in the repository
