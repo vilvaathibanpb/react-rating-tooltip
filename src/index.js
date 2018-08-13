@@ -83,7 +83,7 @@ class Rating extends Component {
 
     return (
       <div>
-        <div className="container">
+        <div className="wrap-container">
           <div className={"rating-container"} style={styleConfig && styleConfig.starContainer ? styleConfig.starContainer : {}}>
             {stars}
           </div>
