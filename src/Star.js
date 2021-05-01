@@ -34,7 +34,7 @@ class Star extends React.Component {
     }
     render() {
         return (
-            <div onClick={this.selectStar} onMouseOver={this.onHover} onMouseOut={this.onMouseLeave} className="tp-container">
+            <div key={this.props.key} onClick={this.selectStar} onMouseOver={this.onHover} onMouseOut={this.onMouseLeave} className="tp-container">
                 {this.state.selected ? this.props.ActiveComponent : this.props.InActiveComponent}
                 {this.state.showTooltip && this.props.tpText && <span className="tooltiptext" style={this.props.tooltipStyle}>{this.props.tpText}</span>}
             </div>
