@@ -1,96 +1,76 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Star from "./Star";
 import PropTypes from 'prop-types';
 
+const Rating = (props) => {
+  const [current, setCurrent] = useState(props.defaultRating);
+  const [hover, setHover] = useState(-1);
 
-class Rating extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      current: this.props.defaultRating,
-      hover: -1,
-    }
-  }
-
-  setSelected = (index) => {
-    const { clearRating, ratingValue, onChange } = this.props;
-    const { current } = this.state;
+  const setSelected = (index) => {
+    const { clearRating, ratingValue, onChange } = props;
     if (clearRating && (current === index + 1)) {
-      this.setState({
-        current: 0,
-        hover: -1
-      })
+      setCurrent(0);
+      setHover(-1);
       onChange(0, "-");
     } else {
-      this.setState({
-        current: index + 1
-      })
+      setCurrent(index + 1);
       onChange(index + 1, ratingValue ? ratingValue[index] : "");
     }
-
   }
 
-  onHover = (index) => {
-    this.setState({
-      hover: index + 1
-    })
+  const onHover = (index) => {
+    setHover(index + 1);
   }
 
-  onMouseLeave = () => {
-    this.setState({
-      hover: -1
-    })
+  const onMouseLeave = () => {
+    setHover(-1);
+  }
+  const { max, counterPosition, textPosition, tooltipContent, ratingValue, styleConfig, disabled } = props;
+  const stars = new Array(max);
+  const currentValue = hover >= 0 ? hover : current
+  for (let i = 0; i < stars.length; i++) {
+    stars[i] = <Star
+      tooltipStyle={styleConfig && styleConfig.tooltipStyle ? styleConfig.tooltipStyle : {}}
+      tpText={tooltipContent && tooltipContent[i] ? tooltipContent[i] : null}
+      selected={i < currentValue ? true : false}
+      key={i}
+      onMouseLeave={disabled ? () => { } : onMouseLeave}
+      onHover={disabled ? () => { } : onHover}
+      index={i}
+      selectStar={disabled ? () => { } : setSelected}
+      InActiveComponent={props.InActiveComponent}
+      ActiveComponent={props.ActiveComponent}
+    />;
+  }
+  if (counterPosition) {
+    counterPosition === 'left' ?
+      stars.unshift((<div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
+        {current}
+      </div>)) :
+      stars.push((<div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
+        {current}
+      </div>))
+  }
+  if (textPosition) {
+    textPosition === 'left' ?
+      stars.unshift((<div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
+        {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
+      </div>)) :
+      stars.push((<div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
+        {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
+      </div>))
   }
 
-  render() {
-    const { max, counterPosition, textPosition, tooltipContent, ratingValue, styleConfig, disabled} = this.props;
-    const { current, hover } = this.state;
-    const stars = new Array(max);
-    const currentValue = hover >= 0 ? hover : current
-    for (let i = 0; i < stars.length; i++) {
-      stars[i] = <Star
-        tooltipStyle={styleConfig && styleConfig.tooltipStyle ? styleConfig.tooltipStyle : {}}
-        tpText={tooltipContent && tooltipContent[i] ? tooltipContent[i] : null}
-        selected={i < currentValue ? true : false}
-        key={i}
-        onMouseLeave={disabled ? ()=>{} : this.onMouseLeave}
-        onHover={disabled ? ()=>{} : this.onHover}
-        index={i}
-        selectStar={disabled ? ()=>{} : this.setSelected}
-        InActiveComponent={this.props.InActiveComponent}
-        ActiveComponent={this.props.ActiveComponent}
-      />;
-    }
-    if (counterPosition) {
-      counterPosition === 'left' ?
-        stars.unshift((<div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
-          {current}
-        </div>)) :
-        stars.push((<div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
-          {current}
-        </div>))
-    }
-    if (textPosition) {
-      textPosition === 'left' ?
-        stars.unshift((<div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
-          {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
-        </div>)) :
-        stars.push((<div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
-          {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
-        </div>))
-    }
-
-    return (
-      <div>
-        <div className="wrap-container">
-          <div className={"rating-container"} style={styleConfig && styleConfig.starContainer ? styleConfig.starContainer : {}}>
-            {stars}
-          </div>
+  return (
+    <div>
+      <div className="wrap-container">
+        <div className={"rating-container"} style={styleConfig && styleConfig.starContainer ? styleConfig.starContainer : {}}>
+          {stars}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 Rating.propTypes = {
