@@ -5,15 +5,10 @@ const Star = (props) => {
     const [selected, setSelected] = useState(props.selected);
     const [showTooltip, setShowTooltip] = useState(false);
 
-    const hasMounted = useRef(false);
     useEffect(() => {
-        if (!hasMounted.current) {
-            hasMounted.current = true;
-            return;
-        }
-        setSelected(selected)
+        setSelected(props.selected)
     },
-        [selected]
+        [props.selected]
     );
 
     const onHover = () => {
