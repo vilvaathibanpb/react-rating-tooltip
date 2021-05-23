@@ -1,45 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-class Star extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selected: this.props.selected,
-            showTooltip: false
-        }
+
+const Star = (props) => {
+    const [selected, setSelected] = useState(props.selected);
+    const [showTooltip, setShowTooltip] = useState(false);
+
+    useEffect(() => {
+        setSelected(props.selected)
+    },
+        [props.selected]
+    );
+
+    const onHover = () => {
+        props.onHover(props.index);
+        setShowTooltip(true);
     }
 
-    componentDidUpdate(PrevProps) {
-        const { selected } = this.props;
-        if (selected !== PrevProps.selected) {
-            this.setState({
-                selected: selected
-            })
-        }
+    const onMouseLeave = () => {
+        props.onMouseLeave();
+        setShowTooltip(false);
     }
-    onHover = () => {
-        this.props.onHover(this.props.index);
-        this.setState({
-            showTooltip: true
-        })
+
+    const selectStar = () => {
+        props.selectStar(props.index);
     }
-    onMouseLeave = () => {
-        this.props.onMouseLeave();
-        this.setState({
-            showTooltip: false
-        })
-    }
-    selectStar = () => {
-        this.props.selectStar(this.props.index)
-    }
-    render() {
-        return (
-            <div key={this.props.key} onClick={this.selectStar} onMouseOver={this.onHover} onMouseOut={this.onMouseLeave} className="tp-container">
-                {this.state.selected ? this.props.ActiveComponent : this.props.InActiveComponent}
-                {this.state.showTooltip && this.props.tpText && <span className="tooltiptext" style={this.props.tooltipStyle}>{this.props.tpText}</span>}
-            </div>
-        );
-    }
+
+    return (
+        <div
+            key={props.key}
+            onClick={selectStar}
+            onMouseOver={onHover}
+            onMouseOut={onMouseLeave}
+            className="tp-container"
+        >
+            {selected ? props.ActiveComponent : props.InActiveComponent}
+            {showTooltip && props.tpText && <span className="tooltiptext" style={props.tooltipStyle}>{props.tpText}</span>}
+        </div>
+    );
 }
 
 export default Star;
