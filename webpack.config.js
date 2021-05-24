@@ -27,5 +27,8 @@ module.exports = {
     },
     plugins: [
         new ForkTsCheckerWebpackPlugin(),
-    ]
+    ],
+    externals: {
+        react: "react"
+    }
 }
