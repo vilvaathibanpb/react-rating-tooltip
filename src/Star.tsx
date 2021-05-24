@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-const Star = (props) => {
+const Star = (props: Props) => {
     const [selected, setSelected] = useState(props.selected);
     const [showTooltip, setShowTooltip] = useState(false);
 
@@ -36,6 +36,19 @@ const Star = (props) => {
             {showTooltip && props.tpText && <span className="tooltiptext" style={props.tooltipStyle}>{props.tpText}</span>}
         </div>
     );
+}
+
+type Props = {
+    tooltipStyle: React.CSSProperties
+    tpText: React.ReactNode
+    selected: boolean
+    key: number,
+    onMouseLeave: () => void,
+    onHover: (index: number) => void,
+    index: number,
+    selectStar: (index: number) => void,
+    InActiveComponent: React.ReactNode,
+    ActiveComponent: React.ReactNode
 }
 
 export default Star;
