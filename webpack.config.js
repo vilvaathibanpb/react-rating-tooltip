@@ -1,8 +1,9 @@
 var path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
         path: path.resolve('lib'),
         filename: 'Rating.js',
@@ -11,9 +12,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.tsx?$/,
                 exclude: /(node_modules)/,
-                use: 'babel-loader'
+                use: [{ loader: 'ts-loader', options: { transpileOnly: true } }]
             },
             {
                 test: /\.css$/,
@@ -21,7 +22,13 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"]
+    },
+    plugins: [
+        new ForkTsCheckerWebpackPlugin(),
+    ],
     externals: {
-        react: 'react',
-     },
+        react: "react"
+    }
 }
