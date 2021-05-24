@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import Star from "./Star";
 import './App.css';
 
-const Rating = (props) => {
+const Rating = (props: Props) => {
   const [current, setCurrent] = useState(props.defaultRating);
   const [hover, setHover] = useState(-1);
 
-  const setSelected = (index) => {
+  const setSelected = (index: number) => {
     const { clearRating, ratingValue, onChange } = props;
 
     if (clearRating && (current === index + 1)) {
@@ -21,7 +20,7 @@ const Rating = (props) => {
     }
   }
 
-  const onHover = (index) => {
+  const onHover = (index: number) => {
     setHover(index + 1)
   }
 
@@ -48,24 +47,26 @@ const Rating = (props) => {
     />;
   }
 
+  const counterElement = (
+    <div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
+      {current}
+    </div>
+  );
   if (counterPosition) {
-    counterPosition === 'left' ?
-      stars.unshift((<div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
-        {current}
-      </div>)) :
-      stars.push((<div key={stars.length + 1} style={styleConfig && styleConfig.counterStyle ? styleConfig.counterStyle : {}}>
-        {current}
-      </div>))
+    counterPosition === 'left'
+      ? stars.unshift(counterElement)
+      : stars.push(counterElement)
   }
 
+  const textElement = (
+    <div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
+      {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
+    </div>
+  );
   if (textPosition) {
-    textPosition === 'left' ?
-      stars.unshift((<div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
-        {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
-      </div>)) :
-      stars.push((<div key={stars.length + 1} style={styleConfig && styleConfig.statusStyle ? styleConfig.statusStyle : {}}>
-        {ratingValue && ratingValue[current - 1] ? ratingValue[current - 1] : '-'}
-      </div>))
+    textPosition === 'left'
+      ? stars.unshift(textElement)
+      : stars.push(textElement)
   }
 
   return (
@@ -77,36 +78,13 @@ const Rating = (props) => {
   );
 }
 
-Rating.propTypes = {
-  max: PropTypes.number.isRequired,
-  defaultRating: PropTypes.number,
-  counterPosition: PropTypes.oneOf(['left', 'right']),
-  clearRating: PropTypes.bool,
-  disabled: PropTypes.bool,
-  textPosition: PropTypes.oneOf(['left', 'right']),
-  tooltipContent: PropTypes.array,
-  ratingValue: PropTypes.array,
-  styleConfig: PropTypes.shape({
-    counterStyle: PropTypes.object,
-    starContainer: PropTypes.object,
-    statusStyle: PropTypes.object,
-    tooltipStyle: PropTypes.object,
-  }),
-  onChange: PropTypes.func.isRequired,
-  ActiveComponent: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element
-  ]).isRequired,
-  InActiveComponent: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element
-  ]).isRequired,
-};
 
 Rating.defaultProps = {
   clearRating: true,
   disabled: false,
   defaultRating: 0,
+  counterPosition: 'left',
+  textPosition: 'right',
   styleConfig: {
     counterStyle: {
       height: '28px',
@@ -137,8 +115,34 @@ Rating.defaultProps = {
       fontSize: '14px',
       padding: '5px',
     }
-
   }
 }
+
+type Position = 'left' | 'right';
+
+type DefaultProps = {
+  clearRating: boolean,
+  disabled: boolean,
+  defaultRating: number,
+  counterPosition: Position,
+  textPosition: Position,
+  styleConfig: {
+    counterStyle: React.CSSProperties,
+    starContainer: React.CSSProperties,
+    statusStyle: React.CSSProperties,
+    tooltipStyle: React.CSSProperties
+  }
+}
+
+type RequiredProps = {
+  max: number,
+  onChange: (index: number, ratingValue: React.ReactNode) => void,
+  tooltipContent: React.ReactNode[],
+  ratingValue: React.ReactNode[],
+  ActiveComponent: React.ReactNode,
+  InActiveComponent: React.ReactNode
+}
+
+type Props = RequiredProps & DefaultProps;
 
 export default Rating;
