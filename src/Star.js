@@ -27,7 +27,6 @@ const Star = (props) => {
 
     return (
         <div
-            key={props.key}
             onClick={selectStar}
             onMouseOver={onHover}
             onMouseOut={onMouseLeave}
