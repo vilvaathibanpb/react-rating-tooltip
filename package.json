@@ -24,7 +24,8 @@
   "scripts": {
     "build": "rm -rf lib && webpack",
     "postbuild": "tsc",
-    "lint": "eslint --fix . && stylelint --fix '**/*.css' && echo 'Lint complete.'"
+    "prepare": "husky install",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix && stylelint --fix '*/**/*.css'"
   },
   "peerDependencies": {
     "react": "^16.8.0",
@@ -42,11 +43,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^1.0.0",
     "eslint": "^7.27.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^1.1.11",
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "husky": "^6.0.0",
@@ -64,14 +62,8 @@
     "webpack": "^4.5.0",
     "webpack-cli": "^4.7.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.{tsx,ts,js,css}": [
-      "yarn run lint"
-    ]
+    "*.{tsx,ts,js,css}": "eslint --fix",
+    "*.css": "stylelint --fix"
   }
 }
