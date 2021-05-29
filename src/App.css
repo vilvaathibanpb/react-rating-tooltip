@@ -1,24 +1,24 @@
-.rating-container{
-    display: flex;
-    min-width: 100px;
-  }
-  
-  .wrap-container{
-    display: flex;
-    justify-content: center;
-  }
-  
-  .tooltiptext{
-    position: absolute;
-    top: 100%;
-    left: -50%;
-    background: rgba(0,0,0,0.8);
-    color: #fff;
-    z-index: 9999;
-    min-width: 70px;
-    text-align: center;
-  }
-  
-  .tp-container{
-    position: relative;
-  }
+.rating-container {
+  display: flex;
+  min-width: 100px;
+}
+
+.wrap-container {
+  display: flex;
+  justify-content: center;
+}
+
+.tooltiptext {
+  position: absolute;
+  top: 100%;
+  left: -50%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  z-index: 9999;
+  min-width: 70px;
+  text-align: center;
+}
+
+.tp-container {
+  position: relative;
+}

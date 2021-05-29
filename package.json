@@ -25,7 +25,7 @@
     "build": "rm -rf lib && webpack",
     "postbuild": "tsc",
     "prepare": "husky install",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix && stylelint --fix '*/**/*.css'"
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --fix && stylelint --fix '*/**/*.css'"
   },
   "peerDependencies": {
     "react": "^16.8.0",
@@ -63,7 +63,7 @@
     "webpack-cli": "^4.7.0"
   },
   "lint-staged": {
-    "*.{tsx,ts,js,css}": "eslint --fix",
+    "*.{tsx,ts,js}": "eslint --fix",
     "*.css": "stylelint --fix"
   }
 }
