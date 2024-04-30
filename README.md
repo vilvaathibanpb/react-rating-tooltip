@@ -17,7 +17,7 @@ npm i react-rating-tooltip
 
 ### Demo
 
-[Sandbox link to Play with](https://codesandbox.io/s/31zl6wop91)
+[Sandbox link to Play with](https://codesandbox.io/p/sandbox/react-rating-tooltip-forked-vp679q)
 
 ### How to Use
 
